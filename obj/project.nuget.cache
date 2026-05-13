@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "GVL3EhtBRMg=",
+  "success": true,
+  "projectFilePath": "D:\\F#\\alienAttack\\alienAttack.fsproj",
+  "expectedPackageFiles": [
+    "D:\\F#\\PaquetesNuget\\fsharp.core\\10.1.202\\fsharp.core.10.1.202.nupkg.sha512"
+  ],
+  "logs": []
+}

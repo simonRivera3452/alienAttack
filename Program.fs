@@ -1,0 +1,3 @@
+﻿open Game
+
+Router.mostrar()

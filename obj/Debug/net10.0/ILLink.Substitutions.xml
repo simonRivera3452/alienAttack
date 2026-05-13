@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="alienAttack">
+    <resource name="FSharpSignatureData.alienAttack" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.alienAttack" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.alienAttack" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.alienAttack" action="remove"></resource>
+    <resource name="FSharpOptimizationData.alienAttack" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.alienAttack" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.alienAttack" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.alienAttack" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.alienAttack" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.alienAttack" action="remove"></resource>
+  </assembly>
+</linker>
