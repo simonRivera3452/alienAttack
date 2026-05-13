@@ -34,15 +34,36 @@ let initialState x y commands =
         Commands = commands
         RedrawScreen = true
     }
-
 let drawMenu state =
-    state.Commands
-    |> Array.iteri (fun i (_,legend) ->
-        displayMessage state.X (state.Y+i) ConsoleColor.Cyan legend
+    let logo = [|
+        "  ___  _      _____  _____  _   _      ___  _____ _____  ___  _____  _   __"
+        " / _ \| |    |_   _||  ___|| \ | |    / _ \|_   _|_   _|/ _ \/  __ \| | / /"
+        "/ /_\ \ |      | |  | |__  |  \| |   / /_\ \ | |   | | / /_\ \ |  \/| |/ / "
+        "|  _  | |      | |  |  __| | . ` |   |  _  | | |   | | |  _  | | |  |    \ "
+        "| | | | |____ _| |_ | |___ | |\  |   | | | | | |   | | | | | | \__/\ | |\  \\"
+        "\_| |_/\_____/\___/ \____/ \_| \_/   \_| |_/ \_/   \_/ \_| |_/\____/\_| \_/"
+    |]
+
+    // 1. Usamos una longitud fija para el logo (la parte más ancha es ~74)
+    let logoWidth = 74
+    let logoX = (Console.BufferWidth / 2) - (logoWidth / 2)
+
+    logo |> Array.iteri (fun i line ->
+        displayMessage logoX (state.Y - 8 + i) ConsoleColor.Green line
     )
 
-    displayMessage state.CursorX (state.Y+state.CurSorSelection) ConsoleColor.Yellow "*"
+    // 2. Para las opciones, buscamos la más larga ("Load Game" o "New Game") 
+    // para que el centro sea el mismo para todas
+    let maxOptionWidth = 10 // "Load Game" tiene 9-10 caracteres
+    let optionsX = (Console.BufferWidth / 2) - (maxOptionWidth / 2)
 
+    state.Commands
+    |> Array.iteri (fun i (_, legend) ->
+        displayMessage optionsX (state.Y + i) ConsoleColor.Cyan legend
+    )
+
+    // 3. El cursor ahora siempre estará en la misma X
+    displayMessage (optionsX - 2) (state.Y + state.CurSorSelection) ConsoleColor.Yellow ">"
 
 let updateMenuKeyboard (keyInfo: ConsoleKeyInfo) state =
     let key = keyInfo.Key

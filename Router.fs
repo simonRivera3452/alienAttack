@@ -1,10 +1,7 @@
 module Game.Router
+open System
 open Game.Utils
 open Game.types
-//
-// La funcion de este modulo es decidir
-// que se muestra en la pantalla
-//
 
 type RouterState =
 | ShowingMenu
@@ -18,8 +15,8 @@ let rec mainLoop state =
         match state with 
         | ShowingMenu -> 
             match Game.mainMenu.mostrar 
-                10 
-                5 
+                0
+                12
                 [| 
                 NewGame, "New Game"
                 LoadGame, "Load Game" 
