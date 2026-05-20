@@ -6,14 +6,16 @@
   <ItemGroup>
     <Compile Include="'Utils.fs" />
     <Compile Include="Types.fs" />
-    <Compile Include="Letters.fs" />
-    <Compile Include="MainMenu.fs" />
-    <Compile Include="PauseMenu.fs" />
     <Compile Include="States.fs" />
+    <Compile Include="Letters.fs" />
+    <Compile Include="GenericMenu.fs" />
+    
+    
+    
     <Compile Include="DisplayObjectsInGame.fs" />
     <Compile Include="UpdateFunctionsInGame.fs" />
-    
-    <Compile Include="Engine.fs" /><Compile Include="SaveinJson.fs" />
+    <Compile Include="Engine.fs" />
+    <Compile Include="SaveinJson.fs" />
     <Compile Include="Router.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

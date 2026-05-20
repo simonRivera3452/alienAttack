@@ -27,3 +27,43 @@ let Pause() =
         "::       ::   :::  ::::: ::  :::: ::    :: ::::"  
         ":         :   : :   : :  :   :: : :    : :: ::"                                
     |]
+
+let GameOverLetters() =
+ [|                                       
+    "   _____      ____       __    __      _____        ____     __    __    _____  ______"    
+    "  / ___ \    (    )      \ \  / /     / ___/       / __ \    ) )  ( (   / ___/  (   __ \ "   
+    " / /   \_)   / /\ \      () \/ ()    ( (__        / /  \ \  ( (    ) ) ( (__     ) (__) )"  
+    "( (  ____   ( (__) )     / _  _ \     ) __)      ( ()  () )  \ \  / /   ) __)   (    __/"   
+    "( ( (__  )   )    (     / / \/ \ \   ( (         ( ()  () )   \ \/ /   ( (       ) \ \  _"  
+    " \ \__/ /   /  /\  \   /_/      \_\   \ \___      \ \__/ /     \  /     \ \___  ( ( \ \_))" 
+    "  \____/   /__(  )__\ (/          \)   \____\      \____/       \/       \____\  )_) \__/ "                                                                                                             
+   |]
+
+let OtherGameOver() =
+ [|                                       
+    " ##### "                                                      
+    "#     #   ##   #    # ######     ####  #    # ###### #####"  
+    "#        #  #  ##  ## #         #    # #    # #      #    #" 
+    "#  #### #    # # ## # #####     #    # #    # #####  #    #" 
+    "#     # ###### #    # #         #    # #    # #      #####" 
+    "#     # #    # #    # #         #    #  #  #  #      #   #"  
+    " #####  #    # #    # ######     ####    ##   ###### #    #"                                                                                                          
+   |]
+
+let generarPantallaGameOver (estadoFinal: Game.States.State) =
+    // 1. Traemos las líneas de arte ASCII originales desde tus letras
+    let logoOriginal = GameOverLetters() 
+    
+    // 2. Diseñamos las líneas de texto con las estadísticas bien ordenadas
+    let estadisticas = [|
+        ""
+        "========================================="
+        $"   PUNTUACIÓN TOTAL : {estadoFinal.Puntuacion} pts"
+        $"   TIEMPO SOBREVIVIDO: {estadoFinal.Clock} segundos"
+        $"   ENEMIGOS ELIMINADOS: {estadoFinal.EnemigosDerrotados}"
+        "========================================="
+        ""
+    |]
+    
+    // 3. Juntamos el arte ASCII con las estadísticas en un solo bloque de texto
+    Array.append logoOriginal estadisticas

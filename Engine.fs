@@ -23,14 +23,16 @@ let rec mainLoop state =
     |> detectarColisionConEnemigo
     |> resetAlien
     |> resetEnemigo
+    |> CheckGameOver
     |> procesarTeclado
     |> redibujarPantalla
     |> fun nuevoEstado ->
-        if nuevoEstado.ProgramState = Finished then
-            nuevoEstado
-        else
-            Thread.Sleep 25
-            nuevoEstado |> mainLoop
+        match nuevoEstado.ProgramState with
+        | Finished -> nuevoEstado
+        | GameOver -> nuevoEstado 
+        | _ -> 
+             Thread.Sleep 25
+             nuevoEstado |> mainLoop
 
 Console.Clear()
 Console.CursorVisible <- false

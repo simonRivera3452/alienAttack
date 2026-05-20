@@ -3,31 +3,8 @@ module Game.mainMenu
 open System
 open Game.letters
 open Game.Utils
-
-type MenuState =
-| Active
-| Terminated
-
-type State<'C> = {
-    MenuState: MenuState
-    X: int
-    Y: int
-    CurSorSelection: int
-    CursorX: int
-    Commands: ('C * string) array
-    RedrawScreen: bool
-}
-
-let initialState x y commands = 
-    {
-        MenuState = Active
-        X = x
-        Y = y
-        CurSorSelection = 0
-        CursorX = x-2
-        Commands = commands
-        RedrawScreen = true
-    }
+open Game.States
+open Game.types
 
 let drawMenu state =
     let logo = MainMenuName()

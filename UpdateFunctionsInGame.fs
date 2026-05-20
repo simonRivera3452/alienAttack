@@ -13,6 +13,7 @@ let redibujarPantalla state =
             dibujarMisilesEnemigos
             displayClock
             displayPuntuación
+            displayAlienLives
         |]
         |> Array.iter (fun f -> f state)
         {state with RedibujarPantalla=false}
@@ -76,37 +77,47 @@ let actualizarEnemigo state =
 
 
 let detectarColisionConAlien state =
-    state.MisilesEnemigos
-    |> List.filter (fun misil -> not (misil.X = state.AlienX+1 && misil.Y = state.AlienY))
-    |> fun nuevosMisiles ->
-        if nuevosMisiles.Length <> state.MisilesEnemigos.Length then 
-            {state with 
-                AlienState=Hit
-                MisilesEnemigos=nuevosMisiles
-                RedibujarPantalla=true
-                ColisionAlien=state.Tick
-            }
-        else
-            state
+
+    if state.AlienState = Hit then 
+        state
+    else
+        state.MisilesEnemigos
+        |> List.filter (fun misil -> not (misil.X = state.AlienX+1 && misil.Y = state.AlienY))
+        |> fun nuevosMisiles ->
+            if nuevosMisiles.Length <> state.MisilesEnemigos.Length then 
+                { state with 
+                    AlienState = Hit
+                    MisilesEnemigos = nuevosMisiles
+                    RedibujarPantalla = true
+                    ColisionAlien = state.Tick
+                    AlienLives = max 0 (state.AlienLives - 1)
+                }
+            else
+                state
 let detectarColisionConEnemigo state =
-    state.Misiles
-    |> List.filter (fun misil -> not (misil.X = state.EnemigoX-1 && misil.Y = state.EnemigoY))
-    |> fun nuevosMisiles ->
-        if nuevosMisiles.Length <> state.Misiles.Length then 
-            {state with 
-                EnemigoEstado=Hit
-                Misiles=nuevosMisiles
-                RedibujarPantalla=true
-                ColisionEnemigo=state.Tick
-                Puntuacion = state.Puntuacion + 100
-            }
-        else
-            state
+
+    if state.EnemigoEstado = Hit then 
+        state
+    else
+        state.Misiles
+        |> List.filter (fun misil -> not (misil.X = state.EnemigoX-1 && misil.Y = state.EnemigoY))
+        |> fun nuevosMisiles ->
+            if nuevosMisiles.Length <> state.Misiles.Length then 
+                { state with 
+                    EnemigoEstado = Hit
+                    Misiles = nuevosMisiles
+                    RedibujarPantalla = true
+                    ColisionEnemigo = state.Tick
+                    Puntuacion = state.Puntuacion + 100
+                    EnemigosDerrotados = state.EnemigosDerrotados + 1
+                }
+            else
+                state
 
 let resetAlien state =
     if state.AlienState = Hit then 
         let tiempo = state.Tick-state.ColisionAlien
-        if tiempo >= 160 then 
+        if tiempo >= 80 then 
             {state with AlienState=Alive;RedibujarPantalla=true}
         else
             state
@@ -116,7 +127,7 @@ let resetAlien state =
 let resetEnemigo state =
     if state.EnemigoEstado = Hit then 
         let tiempo = state.Tick-state.ColisionEnemigo
-        if tiempo >= 160 then 
+        if tiempo >= 80 then 
             {state with EnemigoEstado=Alive;RedibujarPantalla=true}
         else
             state
@@ -159,5 +170,11 @@ let procesarTeclado state =
         state
         |> procesarTecladoApp k.Key
         |> procesarTecladoAlien k.Key
+    else
+        state
+
+let CheckGameOver state =
+    if state.AlienLives <= 0 then 
+        {state with ProgramState = GameOver; RedibujarPantalla=true}
     else
         state

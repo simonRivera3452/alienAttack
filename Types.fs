@@ -16,12 +16,30 @@ type PauseCommand =
 type ProgramState =
 | Running
 | Finished
+| GameOver
 
 type SpriteState =
 | Alive
 | Hit
 
-type Misil = {
-    X: int
-    Y: int
-}
+
+type SpecialAbility = 
+| Charging
+| Ready
+
+type SpecialAbilityCommand =
+| Activate
+| None
+
+// Menu Types 
+
+type MenuState =
+| Active
+| Terminated
+
+
+// Game over menu types
+
+type GameOverMenuCommand =
+    | Restart
+    | ExitToMainMenu

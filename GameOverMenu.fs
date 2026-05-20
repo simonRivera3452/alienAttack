@@ -1,4 +1,6 @@
-module Game.PauseMenu
+module Game.GameOverMenu
+
+
 
 open System
 open Game.letters
@@ -9,9 +11,8 @@ open Game.types
 
 
 let drawMenu state =
-    let logo = Pause()
+    let logo = GameOverLetters()
 
-    // 1. Buscamos la línea más larga del logo de pausa eliminando espacios invisibles (.TrimEnd())
     let logoWidth = 
         if logo.Length > 0 then 
             logo 
@@ -68,7 +69,7 @@ let myLoop state =
         (fun s -> {s with RedrawScreen=false})
         state
 
-let mostrarPauseMenu x y commands =
+let mostrarGameOverMenu x y commands =
     let oldForeground = Console.ForegroundColor
     Console.CursorVisible <- false
 
