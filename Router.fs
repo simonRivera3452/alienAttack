@@ -26,7 +26,7 @@ let rec mainLoop state =
             | LoadGame -> ShowingGame
             | Exit -> Terminated
         | ShowingGame -> 
-            Game.Game.mostrar()
+            Game.Engine.mostrar()
             ShowingMenu
         | Terminated ->
             Terminated
