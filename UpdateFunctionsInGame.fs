@@ -5,7 +5,7 @@ open Game.States
 open Game.DisplayObjectsInGame
 
 
-
+// redraw
 let redibujarPantalla state =
     if state.RedibujarPantalla then 
         Console.Clear()
@@ -22,6 +22,8 @@ let redibujarPantalla state =
         {state with RedibujarPantalla=false}
     else
         state
+
+// update
 
 let actualizarTick state =
     {state with Tick = state.Tick+1}
@@ -70,8 +72,8 @@ let actualizarEnemigo state =
     if state.EnemigoEstado = Alive then
 
         let funcionElegida = Math.Sin
-        let amplitud = 10.0     
-        let frecuencia = 0.1  
+        let amplitud = 12.0     
+        let frecuencia = 0.05  
 
         let centroY = float (Console.BufferHeight / 2)
         
@@ -85,6 +87,7 @@ let actualizarEnemigo state =
     else
         state
 
+// detect collisions
 let detectarColisionConAlien state =
 
     if state.AlienState = Hit then 
@@ -117,12 +120,13 @@ let detectarColisionConEnemigo state =
                     Misiles = nuevosMisiles
                     RedibujarPantalla = true
                     ColisionEnemigo = state.Tick
-                    Puntuacion = state.Puntuacion + 100
+                    Puntuacion = state.Puntuacion + 250
                     EnemigosDerrotados = state.EnemigosDerrotados + 1
                 }
             else
                 state
 
+// resets state after hit
 let resetAlien state =
     if state.AlienState = Hit then 
         let tiempo = state.Tick-state.ColisionAlien
@@ -142,7 +146,9 @@ let resetEnemigo state =
             state
     else
         state
-let procesarTecladoApp key state =
+
+// process keyboard input
+let procesarEscape key state =
     match key with 
     | ConsoleKey.Escape ->
         {state with ProgramState = Finished}
@@ -157,7 +163,7 @@ let procesarTecladoAlien key state =
                 //OrigenY = state.AlienY
                 //Distancia = 0 // <--- Nace con distancia 0
             }
-
+        
             {state with Misiles = nuevoMisil :: state.Misiles}
         | ConsoleKey.UpArrow ->
             {state with AlienY = max 0 (state.AlienY-1)}
@@ -180,7 +186,7 @@ let procesarTeclado state =
     if Console.KeyAvailable then 
         let k = Console.ReadKey true
         state
-        |> procesarTecladoApp k.Key
+        |> procesarEscape k.Key
         |> procesarTecladoAlien k.Key
     else
         state

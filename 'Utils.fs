@@ -1,6 +1,7 @@
 module Game.Utils
 open System
 open System.Threading
+
 let createMainLoop pipeline isProgrammingRunning keyboardPipeline  drawPipeline needToRedraw clearRedraw =
 
     let processKeyboard (state:'State) =

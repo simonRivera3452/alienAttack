@@ -3,6 +3,8 @@ open System
 open Game.Utils
 open Game.types
 open Game.States
+
+
 let dibujarAlien state =
     let sprite =
         if state.AlienState = Alive then 
@@ -40,17 +42,5 @@ let displayAlienLives state =
     | 2 -> displayMessage 0 0 ConsoleColor.Red"💖💖"
     | 1 -> displayMessage 0 0 ConsoleColor.Red"💖"
     | 0 -> displayMessage 0 0 ConsoleColor.Red"☠"
-    | _ -> displayMessage 0 0 ConsoleColor.Red"What did you do to have more than 3 lives??"
+    | _ -> displayMessage 0 0 ConsoleColor.Red"What the hell did you do??"
 
-let SpecialABilityAdvise state = 
-    if state.Clock % 20 = 0 then 
-        displayMessage (Console.BufferWidth/2 - 5) (Console.BufferHeight-2) ConsoleColor.Magenta "SPECIAL ABILITY READY!"
-    else
-        displayMessage (Console.BufferWidth/2 - 5) (Console.BufferHeight-2) ConsoleColor.Magenta "SPECIAL ABILITY CHARGING..."
-
-   // let displaySpecialAbility state = 
-     //   match SpecialAbilityCommand with 
-       // | Activate -> 
-         //   state.Misiles
-           // |> List.iter ( fun SpecialAbility ->
-            //displayMessage misil.X misil.Y ConsoleColor.Yellow "=>" )

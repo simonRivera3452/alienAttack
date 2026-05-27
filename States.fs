@@ -66,7 +66,7 @@ type State<'C> = {
     RedrawScreen: bool
 }
 
-let initialState x y commands = 
+let initialMenuState x y commands = 
     {
         MenuState = Active
         X = x
