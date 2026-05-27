@@ -49,32 +49,19 @@ let actualizarMisiles state =
 let actualizarMisilesEnemigos state =
     if state.MisilesEnemigos <> [] then 
         state.MisilesEnemigos
-        |> Seq.map (fun misil -> { misil with X = misil.X - 1 }) // Viaje en línea recta
+        |> Seq.map (fun misil -> { misil with X = misil.X - 1})
         |> Seq.filter (fun misil -> misil.X >= 0)
         |> Seq.toList
         |> fun nuevosMisiles ->
             { state with MisilesEnemigos = nuevosMisiles; RedibujarPantalla = true } 
     else
         state
-    
-    //if state.MisilesEnemigos <> [] then 
-     //   state.MisilesEnemigos
-      //  |> Seq.map (fun misil -> {misil with X=misil.X-1})
-       // |> Seq.filter (fun misil -> misil.X >= 0)
-        //|> Seq.toList
-        //|> fun nuevosMisiles ->
-        //    {state with MisilesEnemigos = nuevosMisiles;RedibujarPantalla=true} 
-   // else
-     //   state
-
+   
 let actualizarDisparoEnemigo state =
-    // Dispara cada 8 ticks
     if state.EnemigoEstado = Alive && state.Tick % 4 = 0 then 
         let nuevoMisil = {
             X = state.EnemigoX - 2
             Y = state.EnemigoY
-            // OrigenY = 0  // Descomenta esto si no borraste el campo del Record
-            // Distancia = 0 // Descomenta esto si no borraste el campo del Record
         }
         {state with MisilesEnemigos = nuevoMisil :: state.MisilesEnemigos; RedibujarPantalla = true}
     else
@@ -83,8 +70,8 @@ let actualizarEnemigo state =
     if state.EnemigoEstado = Alive then
 
         let funcionElegida = Math.Sin
-        let amplitud = 10.0     // Qué tanto sube y baja desde el centro
-        let frecuencia = 0.1   // Qué tan rápido hace el ciclo
+        let amplitud = 10.0     
+        let frecuencia = 0.1  
 
         let centroY = float (Console.BufferHeight / 2)
         

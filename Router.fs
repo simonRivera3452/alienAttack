@@ -32,6 +32,7 @@ let generarPantallaGameOver (estadoFinal: Game.States.State) =
 
 
 let initialState = ShowingMainMenu
+
 let rec mainLoop state estadoActualDelJuego recordTemporal =
     let nextState, nuevoEstadoJuego, nuevoRecord =
         match state with 
@@ -49,6 +50,7 @@ let rec mainLoop state estadoActualDelJuego recordTemporal =
                 ShowingGame, desdeDisco, desdeDisco
             | Exit -> 
                 Terminated, estadoActualDelJuego, recordTemporal
+    
 
         | ShowingGame -> 
             let estadoAlSalir = mostrarGame estadoActualDelJuego
@@ -67,13 +69,14 @@ let rec mainLoop state estadoActualDelJuego recordTemporal =
                 let partidaReanudada = { estadoActualDelJuego with ProgramState = Running; RedibujarPantalla = true }
                 ShowingGame, partidaReanudada, recordTemporal
             | SaveGame -> 
-                // 🔌 CONEXIÓN 2: Escribimos el estado actual físicamente en el JSON
+
                 Game.Save.guardarPartida estadoActualDelJuego
-                // Mantenemos al jugador en el menú de pausa tras guardar
+    
                 ShowingPauseMenu, estadoActualDelJuego, estadoActualDelJuego
             | ExitToMenu -> 
                 ShowingMainMenu, estadoActualDelJuego, recordTemporal
                 
+
         | ShowingGameOverMenu -> 
             let visualGameOver = generarPantallaGameOver estadoActualDelJuego
             match ShowAMenu 0 18 [| 
@@ -85,6 +88,7 @@ let rec mainLoop state estadoActualDelJuego recordTemporal =
             | ExitToMainMenu -> 
                 ShowingMainMenu, estadoInicial, recordTemporal
                 
+
         | Terminated -> 
             Terminated, estadoActualDelJuego, recordTemporal
 
