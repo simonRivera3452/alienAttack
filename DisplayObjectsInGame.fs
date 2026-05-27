@@ -48,9 +48,9 @@ let SpecialABilityAdvise state =
     else
         displayMessage (Console.BufferWidth/2 - 5) (Console.BufferHeight-2) ConsoleColor.Magenta "SPECIAL ABILITY CHARGING..."
 
-let displaySpecialAbility state = 
-    match SpecialAbilityCommand with 
-    | Activate -> 
-        state.Misiles
-        |> List.iter ( fun SpecialAbility ->
-        displayMessage misil.X misil.Y ConsoleColor.Yellow "=>" )
+   // let displaySpecialAbility state = 
+     //   match SpecialAbilityCommand with 
+       // | Activate -> 
+         //   state.Misiles
+           // |> List.iter ( fun SpecialAbility ->
+            //displayMessage misil.X misil.Y ConsoleColor.Yellow "=>" )

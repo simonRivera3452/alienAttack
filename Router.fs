@@ -47,8 +47,9 @@ let rec mainLoop state estadoActualDelJuego recordTemporal =
             | NewGame -> 
                 ShowingGame, estadoInicial, recordTemporal
             | LoadGame -> 
-                let partidaCargada = { recordTemporal with ProgramState = Running; RedibujarPantalla = true }
-                ShowingGame, partidaCargada, recordTemporal
+                // 🔌 CONEXIÓN 1: Leemos el archivo JSON real desde el disco duro
+                let desdeDisco = Game.Save.cargarPartida()
+                ShowingGame, desdeDisco, desdeDisco
             | Exit -> 
                 Terminated, estadoActualDelJuego, recordTemporal
 
@@ -69,7 +70,9 @@ let rec mainLoop state estadoActualDelJuego recordTemporal =
                 let partidaReanudada = { estadoActualDelJuego with ProgramState = Running; RedibujarPantalla = true }
                 ShowingGame, partidaReanudada, recordTemporal
             | SaveGame -> 
-                
+                // 🔌 CONEXIÓN 2: Escribimos el estado actual físicamente en el JSON
+                Game.Save.guardarPartida estadoActualDelJuego
+                // Mantenemos al jugador en el menú de pausa tras guardar
                 ShowingPauseMenu, estadoActualDelJuego, estadoActualDelJuego
             | ExitToMenu -> 
                 ShowingMainMenu, estadoActualDelJuego, recordTemporal

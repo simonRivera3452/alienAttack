@@ -28,3 +28,4 @@ D:\F#\alienAttack\obj\Debug\net10.0\alienAttack.pdb
 D:\F#\alienAttack\obj\Debug\net10.0\alienAttack.genruntimeconfig.cache
 D:\F#\alienAttack\obj\Debug\net10.0\ref\alienAttack.dll
 D:\F#\alienAttack\obj\Debug\net10.0\alienAttack.sourcelink.json
+D:\F#\alienAttack\bin\Debug\net10.0\FSharp.SystemTextJson.dll

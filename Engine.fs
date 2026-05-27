@@ -1,15 +1,13 @@
 module Game.Engine
 open Game.UpdateFunctionsInGame
+open Game.Utils
+open Game.types
 //
 // Juego from scratch
 //
 open System
 open System.Threading
 open Game.States
-open Game.types
-
-
-
 
 let rec mainLoop state =
     state

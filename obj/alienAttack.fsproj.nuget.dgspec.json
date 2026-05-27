@@ -45,6 +45,11 @@
               "target": "Package",
               "version": "[10.1.202, )",
               "generatePathProperty": true
+            },
+            "FSharp.SystemTextJson": {
+              "target": "Package",
+              "version": "[1.4.36, )",
+              "generatePathProperty": true
             }
           },
           "imports": [

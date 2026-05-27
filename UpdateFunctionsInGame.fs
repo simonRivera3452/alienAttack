@@ -3,6 +3,9 @@ open System
 open Game.types
 open Game.States
 open Game.DisplayObjectsInGame
+
+
+
 let redibujarPantalla state =
     if state.RedibujarPantalla then 
         Console.Clear()
@@ -35,46 +38,65 @@ let updateClock state =
 let actualizarMisiles state =
     if state.Misiles <> [] then 
         state.Misiles
-        |> Seq.map (fun misil -> {misil with X=misil.X+1})
-        |> Seq.filter (fun misil -> misil.X < Console.BufferWidth-2)
+        |> Seq.map (fun misil -> { misil with X = misil.X + 1})
+        |> Seq.filter (fun misil -> misil.X < Console.BufferWidth - 2)
         |> Seq.toList
         |> fun nuevosMisiles ->
-            {state with Misiles = nuevosMisiles;RedibujarPantalla=true} 
+            { state with Misiles = nuevosMisiles; RedibujarPantalla = true } 
     else
         state
 
 let actualizarMisilesEnemigos state =
     if state.MisilesEnemigos <> [] then 
         state.MisilesEnemigos
-        |> Seq.map (fun misil -> {misil with X=misil.X-1})
+        |> Seq.map (fun misil -> { misil with X = misil.X - 1 }) // Viaje en línea recta
         |> Seq.filter (fun misil -> misil.X >= 0)
         |> Seq.toList
         |> fun nuevosMisiles ->
-            {state with MisilesEnemigos = nuevosMisiles;RedibujarPantalla=true} 
+            { state with MisilesEnemigos = nuevosMisiles; RedibujarPantalla = true } 
     else
         state
+    
+    //if state.MisilesEnemigos <> [] then 
+     //   state.MisilesEnemigos
+      //  |> Seq.map (fun misil -> {misil with X=misil.X-1})
+       // |> Seq.filter (fun misil -> misil.X >= 0)
+        //|> Seq.toList
+        //|> fun nuevosMisiles ->
+        //    {state with MisilesEnemigos = nuevosMisiles;RedibujarPantalla=true} 
+   // else
+     //   state
 
 let actualizarDisparoEnemigo state =
-    if state.EnemigoEstado = Alive && state.Tick % 10 = 0 then 
+    // Dispara cada 8 ticks
+    if state.EnemigoEstado = Alive && state.Tick % 4 = 0 then 
         let nuevoMisil = {
-            X = state.EnemigoX-2
+            X = state.EnemigoX - 2
             Y = state.EnemigoY
+            // OrigenY = 0  // Descomenta esto si no borraste el campo del Record
+            // Distancia = 0 // Descomenta esto si no borraste el campo del Record
         }
-        {state with MisilesEnemigos= nuevoMisil :: state.MisilesEnemigos; RedibujarPantalla=true}
+        {state with MisilesEnemigos = nuevoMisil :: state.MisilesEnemigos; RedibujarPantalla = true}
     else
         state
 let actualizarEnemigo state =
-    if state.EnemigoEstado= Alive && state.Tick % 4 = 0 then 
-        let nuevaY = state.EnemigoY+state.EnemigoDir
-        match nuevaY with 
-        | y when y > Console.BufferHeight-1 -> Console.BufferHeight-1,-1
-        | y when y < 0 -> 0,1
-        | y -> y, state.EnemigoDir
-        |> fun (y,dir) ->
-            {state with EnemigoY=y;EnemigoDir=dir;RedibujarPantalla=true}
+    if state.EnemigoEstado = Alive then
+
+        let funcionElegida = Math.Sin
+        let amplitud = 10.0     // Qué tanto sube y baja desde el centro
+        let frecuencia = 0.1   // Qué tan rápido hace el ciclo
+
+        let centroY = float (Console.BufferHeight / 2)
+        
+        let desplazamiento = amplitud * funcionElegida (frecuencia * float state.Tick)
+        let nuevoY = int (Math.Round(centroY + desplazamiento))
+        
+        let maxAbajo = Console.BufferHeight - 2
+        let Yfinal = nuevoY |> max 0 |> min maxAbajo
+        
+        { state with EnemigoY = Yfinal; RedibujarPantalla = true }
     else
         state
-
 
 let detectarColisionConAlien state =
 
@@ -143,9 +165,12 @@ let procesarTecladoAlien key state =
         match key with 
         | ConsoleKey.Spacebar ->
             let nuevoMisil = {
-                X = state.AlienX+2
+                X = state.AlienX + 2
                 Y = state.AlienY
+                //OrigenY = state.AlienY
+                //Distancia = 0 // <--- Nace con distancia 0
             }
+
             {state with Misiles = nuevoMisil :: state.Misiles}
         | ConsoleKey.UpArrow ->
             {state with AlienY = max 0 (state.AlienY-1)}

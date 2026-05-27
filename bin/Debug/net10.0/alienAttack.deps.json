@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v10.0": {
       "alienAttack/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "10.1.202"
+          "FSharp.Core": "10.1.202",
+          "FSharp.SystemTextJson": "1.4.36"
         },
         "runtime": {
           "alienAttack.dll": {}
@@ -62,6 +63,17 @@
             "locale": "zh-Hant"
           }
         }
+      },
+      "FSharp.SystemTextJson/1.4.36": {
+        "dependencies": {
+          "FSharp.Core": "10.1.202"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.SystemTextJson.dll": {
+            "assemblyVersion": "1.4.0.0",
+            "fileVersion": "1.4.36.44143"
+          }
+        }
       }
     }
   },
@@ -77,6 +89,13 @@
       "sha512": "sha512-AEGcKK+UJOEa+g7+Y5N/R+EtafmIuqufCDeRdWXoIko1/JQT4jr+zH2PnNHVC4gPB19/pmIpQiuAs01pH8Ao5Q==",
       "path": "fsharp.core/10.1.202",
       "hashPath": "fsharp.core.10.1.202.nupkg.sha512"
+    },
+    "FSharp.SystemTextJson/1.4.36": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1xLk0SBF1nedD74B77rcArjD2d+DeZwbNI7BVCAyKwIBERo1VoX8Mf4AtX0OV2L3ZeM/XS1b6BuhXCyoh0KBnw==",
+      "path": "fsharp.systemtextjson/1.4.36",
+      "hashPath": "fsharp.systemtextjson.1.4.36.nupkg.sha512"
     }
   }
 }

@@ -55,6 +55,22 @@
             "locale": "zh-Hant"
           }
         }
+      },
+      "FSharp.SystemTextJson/1.4.36": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/FSharp.SystemTextJson.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.SystemTextJson.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
       }
     }
   },
@@ -100,11 +116,26 @@
         "lib/netstandard2.1/zh-Hans/FSharp.Core.resources.dll",
         "lib/netstandard2.1/zh-Hant/FSharp.Core.resources.dll"
       ]
+    },
+    "FSharp.SystemTextJson/1.4.36": {
+      "sha512": "1xLk0SBF1nedD74B77rcArjD2d+DeZwbNI7BVCAyKwIBERo1VoX8Mf4AtX0OV2L3ZeM/XS1b6BuhXCyoh0KBnw==",
+      "type": "package",
+      "path": "fsharp.systemtextjson/1.4.36",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fsharp.systemtextjson.1.4.36.nupkg.sha512",
+        "fsharp.systemtextjson.nuspec",
+        "lib/netstandard2.0/FSharp.SystemTextJson.dll",
+        "lib/netstandard2.0/FSharp.SystemTextJson.pdb",
+        "lib/netstandard2.0/FSharp.SystemTextJson.xml"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "FSharp.Core >= 10.1.202"
+      "FSharp.Core >= 10.1.202",
+      "FSharp.SystemTextJson >= 1.4.36"
     ]
   },
   "packageFolders": {
@@ -113,11 +144,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\f#\\alienAttack\\alienAttack.fsproj",
+      "projectUniqueName": "D:\\F#\\alienAttack\\alienAttack.fsproj",
       "projectName": "alienAttack",
-      "projectPath": "D:\\f#\\alienAttack\\alienAttack.fsproj",
+      "projectPath": "D:\\F#\\alienAttack\\alienAttack.fsproj",
       "packagesPath": "D:\\F#\\PaquetesNuget",
-      "outputPath": "D:\\f#\\alienAttack\\obj\\",
+      "outputPath": "D:\\F#\\alienAttack\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Simón\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -150,6 +181,11 @@
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
             "version": "[10.1.202, )",
+            "generatePathProperty": true
+          },
+          "FSharp.SystemTextJson": {
+            "target": "Package",
+            "version": "[1.4.36, )",
             "generatePathProperty": true
           }
         },

@@ -32,7 +32,7 @@ let initialState x y commands logo =
     }
 
 let drawMenu state =
-    // 1. Centramos el logo dinámico y limpiamos los espacios fantasmas
+
     let logoWidth = 
         if state.Logo.Length > 0 then 
             state.Logo |> Array.map (fun line -> line.TrimEnd().Length) |> Array.max 
@@ -58,7 +58,6 @@ let drawMenu state =
         displayMessage optionsX (state.Y + i) ConsoleColor.Cyan legend
     )
 
-    // 3. Dibujamos el cursor alineado
     displayMessage (optionsX - 4) (state.Y + state.CurSorSelection) ConsoleColor.Yellow ">"
 
 let updateMenuKeyboard (keyInfo: ConsoleKeyInfo) state =
@@ -75,7 +74,6 @@ let updateMenuKeyboard (keyInfo: ConsoleKeyInfo) state =
     else
         state
 
-// Nuestro bucle ahora corre perfectamente con cualquier tipo de comando 'C
 let myLoop state = 
     createMainLoop 
         [||]
@@ -86,7 +84,6 @@ let myLoop state =
         (fun s -> {s with RedrawScreen = false})
         state
 
-// Esta es la única función que necesitas llamar desde el Router
 let ShowAMenu x y commands logo =
     let oldForeground = Console.ForegroundColor
     Console.CursorVisible <- false
