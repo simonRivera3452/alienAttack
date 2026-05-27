@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("alienAttack")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f5b086c444d81dc3cf6936abbbef3fdb175e039")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f78a160faf09be304fb1022d940a3c157a244fe6")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("alienAttack")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("alienAttack")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
