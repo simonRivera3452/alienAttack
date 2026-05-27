@@ -19,7 +19,9 @@ let guardarPartida (state: State) =
         let json = JsonSerializer.Serialize(state, options)
         File.WriteAllText(nombreArchivo, json)
     with 
-    | ex -> printfn "Error al guardar: {ex.Message}" 
+    | ex -> printfn "Error al guardar" 
+
+
 let cargarPartida () =
     if File.Exists nombreArchivo then
         try

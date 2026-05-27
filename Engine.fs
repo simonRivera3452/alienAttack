@@ -41,6 +41,3 @@ let mostrarGame estadoEntrada =
         estadoEntrada 
         |> mainLoop
     game
-
-
-
