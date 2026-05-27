@@ -10,13 +10,13 @@ let redibujarPantalla state =
     if state.RedibujarPantalla then 
         Console.Clear()
         [|
+            displayClock
+            displayPuntuación
+            displayAlienLives
             dibujarAlien
             dibujarMisiles
             dibujarEnemigo
             dibujarMisilesEnemigos
-            displayClock
-            displayPuntuación
-            displayAlienLives
         |]
         |> Array.iter (fun f -> f state)
         {state with RedibujarPantalla=false}
