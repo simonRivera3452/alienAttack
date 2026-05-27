@@ -30,3 +30,5 @@ let cargarPartida () =
         | _ -> estadoInicial
     else
         estadoInicial
+
+        
