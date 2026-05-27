@@ -29,8 +29,6 @@ type State = {
     EnemigosDerrotados: int
     ColisionAlien: int
     ColisionEnemigo: int
-    SpecialAbility: SpecialAbility
-    specialAbilityCoordinates: SpecialAbilityCoordinates
 }
 
 let estadoInicial = {
@@ -52,8 +50,6 @@ let estadoInicial = {
     EnemigosDerrotados = 0
     ColisionAlien = 0
     ColisionEnemigo = 0
-    SpecialAbility = Charging
-    specialAbilityCoordinates = {x=0;y=0}
 }
 
 
